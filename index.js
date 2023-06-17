@@ -10,16 +10,30 @@ const app = express();
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect("mongodb://0.0.0.0:27017/Login", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(() => {
-    console.log('Connected to MongoDB');
-  })
-  .catch((error) => {
-    console.error('Failed to connect to MongoDB:', error);
-  });
+mongoose.connect('mongodb+srv://dhinakaran75493:dhinakaran75493@login-register.lkjv8kv.mongodb.net/?retryWrites=true&w=majority');
+
+const con = mongoose.connection; //to get the connection status
+
+try {
+    con.on("open", () => {
+      console.log("MongoDB connected!!!!");
+    });
+  } catch (error) {
+    console.log("Error: " + error);
+  }
+
+
+
+// mongoose.connect("mongodb://0.0.0.0:27017/Login", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// })
+//   .then(() => {
+//     console.log('Connected to MongoDB');
+//   })
+//   .catch((error) => {
+//     console.error('Failed to connect to MongoDB:', error);
+//   });
 
 // Create a user schema
 const userSchema = new mongoose.Schema({
